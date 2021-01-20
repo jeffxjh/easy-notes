@@ -18,10 +18,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
 import java.util.Arrays;
 
 /**
  * Web安全配置
+ *
  * @author: zealon
  * @since: 2020/11/16
  */
@@ -57,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 // 对于获取token的rest api要允许匿名访问
-                .antMatchers("/register", "/auth/**", "/oauth2/**" ).permitAll()
+                .antMatchers("/register", "/auth/**", "/oauth2/**").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated()
 
@@ -69,10 +71,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-        // 设置UserDetailsService
-        .userDetailsService(this.defaultUserDetailsService)
-        // 使用BCrypt进行密码的hash
-        .passwordEncoder(passwordEncoder());
+                // 设置UserDetailsService
+                .userDetailsService(this.defaultUserDetailsService)
+                // 使用BCrypt进行密码的hash
+                .passwordEncoder(passwordEncoder());
     }
 
     /**
@@ -91,6 +93,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 跨域请求配置
+     *
      * @return
      */
     @Bean
@@ -98,9 +101,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         CorsConfiguration configuration = new CorsConfiguration();
         // 允许请求的域名
         configuration.setAllowedOrigins(
-                Arrays.asList("http://localhost:9000",
-                "http://notes.zealon.cn",
-                "https://notes.zealon.cn"));
+                Arrays.asList("http://localhost:9002",
+                        "http://xujh.cool:9002",
+                        "https://xujh.cool:9002",
+                        "http://8.210.180.51:9002",
+                        "https://8.210.180.51:9002",
+                        "http://notes.zealon.cn",
+                        "https://notes.zealon.cn"));
         // 允许请求的方法
         configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
         configuration.applyPermitDefaultValues();

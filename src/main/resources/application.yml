@@ -4,8 +4,10 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost/easy-notes
+      #uri: mongodb://localhost/easy-notes
       port: 27017
+      password: 123456
+      host: 8.210.180.51
   # 线程池配置
   thread-pool:
     default:
@@ -58,3 +60,11 @@ oauth2:
       access-token-uri: https://github.com/login/oauth/access_token
       user-authorization-uri: https://github.com/login/oauth/authorize
       user-info-uri: https://api.github.com/user
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core: DEBUG
