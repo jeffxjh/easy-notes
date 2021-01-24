@@ -1,15 +1,16 @@
 package cn.zealon.notes.security.service;
 
+import cn.zealon.notes.domain.UserInfo;
 import cn.zealon.notes.security.domain.LoginUserBean;
 import cn.zealon.notes.service.UserService;
-import cn.zealon.notes.domain.UserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 import java.time.LocalDateTime;
 
 /**
@@ -21,7 +22,7 @@ import java.time.LocalDateTime;
 @Slf4j
 public class DefaultUserDetailsService implements UserDetailsService {
 
-    @Autowired
+    @Resource
     private UserService userService;
 
     @Override

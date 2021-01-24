@@ -59,7 +59,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 // 对于获取token的rest api要允许匿名访问
-                .antMatchers("/register", "/auth/**", "/oauth2/**").permitAll()
+                .antMatchers("/register"
+                        , "/enableUserByEmail"
+                        , "/emailVerify"
+                        , "/activateMail"
+                        , "/uploadFile/**"
+                        , "/auth/**"
+                        , "/oauth2/**").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated()
 
@@ -101,7 +107,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         CorsConfiguration configuration = new CorsConfiguration();
         // 允许请求的域名
         configuration.setAllowedOrigins(
-                Arrays.asList("http://localhost:9002",
+                Arrays.asList("http://localhost:9000",
                         "http://xujh.cool:9002",
                         "https://xujh.cool:9002",
                         "http://8.210.180.51:9002",

@@ -28,7 +28,7 @@ public class OAuth2Controller {
      * @return
      */
     @GetMapping("authorized/callback/{clientId}")
-    public Result authorizedCallback(@PathVariable("clientId") String clientId, String code, String state){
+    public Result<?> authorizedCallback(@PathVariable("clientId") String clientId, String code, String state){
         return this.auth2Service.authorized(clientId, code, state);
     }
 }

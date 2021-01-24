@@ -34,6 +34,11 @@ public enum HttpCodeEnum {
     AUTH_EXPIRED(3000,"认证到期"),
     AUTH_PWD_ERROR(3001,"用户名或密码错误"),
     AUTH_USER_DISABLED(3002,"用户被禁用"),
+    EMAIL_ERROR(3004,"邮箱格式不正确"),
+    ACTIVE_LINK(3005,"激活链接无效，请重新注册"),
+    REPETITION_REGEDIT(3006,"不能重复注册,去登陆吧！"),
+    FILE_NOT_FOUND(3007,"未找到文件！"),
+    FILE_ERROR(3008,"上传文件有误！"),
     AUTH_USER_LOCKED(3003,"用户被锁定");
 
     private final int code;

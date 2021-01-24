@@ -13,10 +13,12 @@ import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 
 /**
  * JWT登录认证
+ *
  * @author: zealon
  * @since: 2020/11/27
  */
@@ -35,6 +37,7 @@ public class JwtAuthService {
 
     /**
      * 登录认证换取JWT令牌
+     *
      * @param username
      * @param password
      * @return
@@ -42,10 +45,12 @@ public class JwtAuthService {
      */
     public Result login(String username, String password) throws CustomException {
         try {
-            UsernamePasswordAuthenticationToken upToken =
-                    new UsernamePasswordAuthenticationToken(username, password);
+            UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
+            System.err.println(password);
             Authentication authentication = authenticationManager.authenticate(upToken);
+
             SecurityContextHolder.getContext().setAuthentication(authentication);
+
             LoginUserBean userDetails = (LoginUserBean) defaultUserDetailsService.loadUserByUsername(username);
 
             // 生成Token
@@ -57,7 +62,7 @@ public class JwtAuthService {
             vo.setAvatarUrl(userDetails.getUser().getAvatarUrl());
             vo.setUpdateTime(userDetails.getUser().getUpdateTime());
             return ResultUtil.success(vo);
-        } catch (Exception e){
+        } catch (Exception e) {
             Result result;
             if (e instanceof BadCredentialsException) {
                 // 密码错误
@@ -86,11 +91,12 @@ public class JwtAuthService {
 
     /**
      * 刷新Token过期时间
+     *
      * @param oldToken
      * @return
      */
-    public String refreshToken(String oldToken){
-        if(!jwtTokenUtil.isTokenExpired(oldToken)){
+    public String refreshToken(String oldToken) {
+        if (!jwtTokenUtil.isTokenExpired(oldToken)) {
             return jwtTokenUtil.refreshToken(oldToken);
         }
         return null;
@@ -98,6 +104,7 @@ public class JwtAuthService {
 
     /**
      * 获取当前认证对象
+     *
      * @return 返回null标识认证过期
      */
     public LoginUserBean getLoginUserBean() {
@@ -105,6 +112,6 @@ public class JwtAuthService {
         if (authentication.getPrincipal().toString().equals("anonymousUser")) {
             return null;
         }
-        return (LoginUserBean)  authentication.getPrincipal();
+        return (LoginUserBean) authentication.getPrincipal();
     }
 }

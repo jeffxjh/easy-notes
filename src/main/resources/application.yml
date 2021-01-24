@@ -4,10 +4,11 @@ server:
 spring:
   data:
     mongodb:
-      #uri: mongodb://localhost/easy-notes
-      port: 27017
-      password: 123456
-      host: 8.210.180.51
+      #uri: mongodb://127.0.0.1:27017/admin
+      uri: mongodb://192.168.0.103:27017/admin?authSource=admin
+#      port: 37017
+#      password: 123456
+#      host: 8.210.180.51
   # 线程池配置
   thread-pool:
     default:
@@ -15,7 +16,27 @@ spring:
       maximumPoolSize: 4
       keepAliveTime: 3000
       queueCapacity: 1024
-
+  redis:
+    database: 1
+    host: 127.0.0.1
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1
+        min-idle: 0
+    password: 123456
+    port: 6379
+    timeout: 3000
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 30MB
+  mail:
+    default-encoding: UTF-8
+    host: smtp.qq.com
+    password: iqfrnlmbsllqebei
+    username: 2518846094@qq.com
 # JWT配置
 jwt:
   # 秘钥
@@ -68,3 +89,7 @@ logging:
         data:
           mongodb:
             core: DEBUG
+file:
+  upload:
+    path: 'E:\\db\\'
+
